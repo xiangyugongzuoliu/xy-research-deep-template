@@ -5,7 +5,7 @@ metadata:
 
 spec:
   name: Deep Research API
-  description: 基于 Gemini 2.0 Flash Thinking 的深度研究引擎，支持异步任务执行、实时进度追踪、Webhook 回调。
+  description: 基于 Gemini 的深度研究引擎，支持异步任务执行、实时进度追踪、Webhook 回调
 
   icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
   author: 翔宇工作流
