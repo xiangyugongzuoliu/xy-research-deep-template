@@ -11,7 +11,7 @@
 
 <p align="center">
   🌐 <a href="https://xiangyugongzuoliu.com/">官网</a> |
-  📦 <a href="https://github.com/aiworkflowstudio/deep-research-zeabur">GitHub 仓库</a> |
+  📦 <a href="https://github.com/xiangyugongzuoliu/deep-research-zeabur">GitHub 仓库</a> |
   🐳 <a href="https://hub.docker.com/r/xiangyugongzuoliu/deep-research">Docker Hub</a> |
   🎬 <a href="https://www.youtube.com/@xiangyugongzuoliu">YouTube</a>
 </p>

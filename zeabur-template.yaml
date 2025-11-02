@@ -7,7 +7,7 @@ spec:
   name: Deep Research
   description: 基于 Gemini 的深度研究引擎，支持异步任务执行、实时进度追踪、Webhook 回调
 
-  icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
+  icon: https://raw.githubusercontent.com/xiangyugongzuoliu/deep-research-zeabur/main/assets/icon.svg
   author: 翔宇工作流
 
   tags:
@@ -20,11 +20,11 @@ spec:
     - 深度研究
     - 自动化
 
-  readme: https://github.com/aiworkflowstudio/deep-research-zeabur
+  readme: https://github.com/xiangyugongzuoliu/deep-research-zeabur
 
   source:
     type: git
-    url: https://github.com/aiworkflowstudio/deep-research-zeabur
+    url: https://github.com/xiangyugongzuoliu/deep-research-zeabur
 
   variables:
     - key: GOOGLE_GENERATIVE_AI_API_KEY
@@ -43,7 +43,7 @@ spec:
       spec:
         id: deep-research
         name: Deep Research API
-        icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
+        icon: https://raw.githubusercontent.com/xiangyugongzuoliu/deep-research-zeabur/main/assets/icon.svg
         source:
           image: xiangyugongzuoliu/deep-research:latest
         ports:
