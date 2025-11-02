@@ -37,6 +37,11 @@ spec:
       name: 访问密码
       description: 用于前端代理模式和 REST API 认证（建议使用 32 位随机字符串）
 
+    - key: TAVILY_API_KEY
+      type: STRING
+      name: Tavily API Key（可选）
+      description: 用于外部搜索服务，从 https://tavily.com 获取。配置后将自动获取图片和完整引用来源，留空则使用 Gemini 内置搜索
+
   services:
     - name: deep-research
       template: PREBUILT
@@ -56,5 +61,8 @@ spec:
             expose: true
           ACCESS_PASSWORD:
             expose: true
+          TAVILY_API_KEY:
+            expose: true
+            default: ""
           TASK_RETENTION_HOURS:
             default: "24"
