@@ -35,12 +35,12 @@
 | 变量名 | 说明 | 默认值 | 必填 |
 |--------|------|--------|------|
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini API Key（[获取地址](https://aistudio.google.com/app/apikey)） | 无 | ✅ |
-| `X_API_KEY` | API 访问密钥（建议使用 32 位随机字符串） | 无 | ✅ |
+| `ACCESS_PASSWORD` | 访问密码（用于前端代理模式和 REST API 认证） | 无 | ✅ |
 | `TASK_RETENTION_HOURS` | 任务保留时间（小时） | `24` | ❌ |
 
 **安全提示：**
-- Gemini API Key 和 X_API_KEY 务必妥善保管
-- 建议使用 `openssl rand -base64 32` 生成 X_API_KEY
+- Gemini API Key 和 ACCESS_PASSWORD 务必妥善保管
+- 建议使用 `openssl rand -base64 32` 生成 ACCESS_PASSWORD
 
 ---
 
