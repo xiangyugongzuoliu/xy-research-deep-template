@@ -1,183 +1,180 @@
-# Deep Research API
+# Deep Research API - Zeabur 部署模板
 
-<div align="center">
+<p align="center">
+  <strong>基于 Gemini 2.0 Flash Thinking 的深度研究引擎</strong>
+</p>
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/TEMPLATE_CODE?referralCode=xiangyugongzuoliu)
+<p align="center">
+  AI 驱动的深度研究工具，支持异步任务执行、实时进度追踪、Webhook 回调<br>
+  提供 REST API 和 Web 界面，完美集成 n8n 等自动化工具
+</p>
 
-**基于 Gemini 2.0 Flash Thinking 的深度研究引擎 REST API**
-
-[官网](https://xiangyugongzuoliu.com/) · [YouTube](https://www.youtube.com/@xiangyugongzuoliu) · [GitHub](https://github.com/xiangyugongzuoliu)
-
-</div>
+<p align="center">
+  🌐 <a href="https://xiangyugongzuoliu.com/">官网</a> |
+  📦 <a href="https://github.com/aiworkflowstudio/deep-research-zeabur">GitHub 仓库</a> |
+  🐳 <a href="https://hub.docker.com/r/xiangyugongzuoliu/deep-research">Docker Hub</a> |
+  🎬 <a href="https://www.youtube.com/@xiangyugongzuoliu">YouTube</a>
+</p>
 
 ---
 
-## ✨ 功能特点
+## 🚀 一键部署
 
-- 🤖 **AI 深度思考** - 基于 Gemini 2.0 Flash Thinking 模型，提供深度推理能力
-- 🔍 **智能搜索** - 自动规划搜索任务，多维度收集信息
-- 📝 **长文本报告** - 生成结构化 Markdown 报告，字数可达 3000+ 字
-- 🔄 **异步执行** - 支持异步任务执行，轮询和 Webhook 两种模式
-- 🔐 **API 认证** - 使用 x-api-key 认证，保护 API 端点
-- 🌐 **n8n 集成** - 完美适配 n8n 等自动化工具
-- 💯 **100% 免费** - 使用 Gemini 免费额度
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/TEMPLATE_CODE?referralCode=xiangyugongzuoliu)
 
-## 🚀 快速部署
+点击上方按钮，一键部署到 Zeabur。
 
-### 方式 1：一键部署到 Zeabur（推荐）
+> **注意：** 部署前请准备好 Gemini API Key，并设置安全的 API 访问密钥！
 
-点击上方按钮或访问：[部署链接](https://zeabur.com/templates/TEMPLATE_CODE?referralCode=xiangyugongzuoliu)
+---
 
-配置以下环境变量：
-- `GOOGLE_GENERATIVE_AI_API_KEY` - [获取 Gemini API Key](https://aistudio.google.com/app/apikey)
-- `X_API_KEY` - API 访问密钥（建议使用 32 位随机字符串）
+## ⚙️ 环境变量配置
 
-### 方式 2：Docker 部署
+部署时需要配置以下环境变量：
 
-```bash
-# 拉取镜像
-docker pull xiangyugongzuoliu/deep-research:latest
+| 变量名 | 说明 | 默认值 | 必填 |
+|--------|------|--------|------|
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini API Key（[获取地址](https://aistudio.google.com/app/apikey)） | 无 | ✅ |
+| `X_API_KEY` | API 访问密钥（建议使用 32 位随机字符串） | 无 | ✅ |
+| `TASK_RETENTION_HOURS` | 任务保留时间（小时） | `24` | ❌ |
 
-# 运行容器
-docker run -d \
-  --name deep-research \
-  -p 3000:3000 \
-  -e GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_key \
-  -e X_API_KEY=your_api_key \
-  xiangyugongzuoliu/deep-research:latest
+**安全提示：**
+- Gemini API Key 和 X_API_KEY 务必妥善保管
+- 建议使用 `openssl rand -base64 32` 生成 X_API_KEY
+
+---
+
+## 📖 使用说明
+
+### API 端点
+
+#### 创建研究任务
+```
+POST /api/research
 ```
 
-### 方式 3：Docker Compose
-
-```yaml
-version: "3.9"
-services:
-  deep-research:
-    image: xiangyugongzuoliu/deep-research:latest
-    container_name: deep-research
-    ports:
-      - "3000:3000"
-    environment:
-      - GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_key
-      - X_API_KEY=your_api_key
-      - TASK_RETENTION_HOURS=24
-    restart: unless-stopped
+#### 查询任务状态
+```
+GET /api/research/:taskId
 ```
 
-## 📖 API 使用
-
-### 创建研究任务
+### 请求示例
 
 ```bash
-curl -X POST https://your-domain/api/research \
+# 创建研究任务
+curl -X POST https://your-domain.zeabur.app/api/research \
   -H "Content-Type: application/json" \
   -H "x-api-key: YOUR_API_KEY" \
   -d '{
     "query": "2024年人工智能发展趋势",
-    "language": "zh-CN"
+    "language": "zh-CN",
+    "maxSearchTasks": 8
   }'
-```
 
-**响应**：
-```json
-{
-  "success": true,
-  "taskId": "task_abc123",
-  "status": "pending",
-  "pollUrl": "/api/research/task_abc123"
-}
-```
-
-### 查询任务状态
-
-```bash
-curl https://your-domain/api/research/task_abc123 \
+# 查询任务状态
+curl https://your-domain.zeabur.app/api/research/task_xxx \
   -H "x-api-key: YOUR_API_KEY"
 ```
 
-**响应（进行中）**：
-```json
-{
-  "success": false,
-  "taskId": "task_abc123",
-  "status": "running",
-  "progress": {
-    "percentage": 45,
-    "currentStep": "search-task",
-    "stepDescription": "正在执行搜索任务 (3/8)"
-  }
-}
+### 请求参数
+
+**创建任务参数：**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `query` | string | ✅ | 研究主题 |
+| `language` | string | ❌ | 语言（默认：自动检测） |
+| `maxSearchTasks` | number | ❌ | 最大搜索任务数（默认：8） |
+| `includeImages` | boolean | ❌ | 是否包含图片（默认：true） |
+| `includeReferences` | boolean | ❌ | 是否包含参考文献（默认：true） |
+| `searchMaxResults` | number | ❌ | 每次搜索最大结果数（默认：5） |
+| `webhookUrl` | string | ❌ | Webhook 回调地址 |
+
+---
+
+## ✨ 核心功能
+
+- ✅ **AI 深度思考** - 基于 Gemini 2.0 Flash Thinking 模型
+- ✅ **智能搜索** - 自动规划多维度搜索任务
+- ✅ **长文本报告** - 生成 3000+ 字的结构化 Markdown 报告
+- ✅ **异步执行** - 支持轮询和 Webhook 两种模式
+- ✅ **实时进度** - 0-100% 进度追踪
+- ✅ **API 认证** - x-api-key 保护
+- ✅ **n8n 集成** - 完美适配自动化工具
+- ✅ **Web 界面** - 现代化 Web UI
+- ✅ **100% 免费** - 使用 Gemini 免费额度
+
+---
+
+## 🔧 访问你的服务
+
+部署完成后，你将获得一个 Zeabur 提供的域名：
+
+```
+https://your-app-name.zeabur.app
 ```
 
-**响应（已完成）**：
-```json
-{
-  "success": true,
-  "taskId": "task_abc123",
-  "status": "completed",
-  "result": {
-    "report": "# 标题\n\n完整的研究报告...",
-    "title": "2024年人工智能发展趋势",
-    "wordCount": 3500
-  }
-}
-```
+- **Web 界面**：`https://your-app-name.zeabur.app`
+- **API 文档**：`https://your-app-name.zeabur.app/api-docs`
+- **API 端点**：`https://your-app-name.zeabur.app/api/research`
 
-## 🔌 n8n 集成示例
+---
+
+## 🌐 n8n 集成示例
 
 ### 轮询模式
 
-1. **HTTP Request** - 创建任务
+1. **HTTP Request** - 创建任务，记录 taskId
 2. **Wait** - 等待 10 秒
 3. **HTTP Request** - 查询状态
-4. **IF** - 检查状态，如果 `running` 则返回步骤 2
+4. **IF** - 如果 status === "running" 返回步骤 2
 
 ### Webhook 模式（推荐）
 
 1. **Webhook** - 创建 Webhook URL
 2. **HTTP Request** - 创建任务（包含 webhookUrl）
-3. 等待 Webhook 回调，自动接收结果
+3. 等待 Webhook 自动回调，接收结果
 
-## 📊 技术栈
-
-- **框架**: Next.js 15 + React 19
-- **AI 模型**: Gemini 2.0 Flash Thinking + Gemini 2.0 Flash Exp
-- **运行时**: Node.js 18+
-- **容器**: Docker + Multi-platform (amd64/arm64)
-- **部署**: Zeabur Cloud
+---
 
 ## 💰 成本说明
 
-- **Zeabur 免费计划**: 足够个人和小型项目使用
-- **Gemini API 免费额度**:
+- **Zeabur 免费计划**：足够个人和小型项目使用
+- **Gemini API 免费额度**：
   - 每分钟 15 次请求
   - 每天 1500 次请求
   - 完全免费
 
-**预估成本**: $0/月（在免费额度内）
-
-## 📝 环境变量
-
-| 变量名 | 必填 | 默认值 | 说明 |
-|--------|------|--------|------|
-| `GOOGLE_GENERATIVE_AI_API_KEY` | ✅ | - | Gemini API Key |
-| `X_API_KEY` | ✅ | - | API 访问密钥 |
-| `TASK_RETENTION_HOURS` | ❌ | 24 | 任务保留时间（小时） |
-| `GOOGLE_GENERATIVE_AI_API_BASE_URL` | ❌ | - | Gemini API Base URL |
-
-## 🔗 相关链接
-
-- **官网**: https://xiangyugongzuoliu.com/
-- **YouTube**: https://www.youtube.com/@xiangyugongzuoliu
-- **GitHub**: https://github.com/xiangyugongzuoliu
-- **Docker Hub**: https://hub.docker.com/r/xiangyugongzuoliu/deep-research
-- **Gemini API**: https://aistudio.google.com/app/apikey
-
-## 📄 许可证
-
-本项目基于私有源码，Docker 镜像公开发布供免费使用。
+**预估成本**：$0/月（在免费额度内）
 
 ---
 
-**作者**: 翔宇工作流
-**年份**: 2025
+## 🙏 技术栈
+
+- **框架**：Next.js 15 + React 19
+- **AI 模型**：Gemini 2.0 Flash Thinking + Gemini 2.0 Flash Exp
+- **语言**：TypeScript
+- **样式**：Tailwind CSS
+- **API**：REST API + SSE
+- **运行时**：Node.js 18+
+- **容器**：Docker（支持 amd64/arm64）
+- **部署**：Zeabur Cloud
+
+---
+
+## 📚 相关链接
+
+- **官网**：https://xiangyugongzuoliu.com/
+- **YouTube**：https://www.youtube.com/@xiangyugongzuoliu
+- **GitHub**：https://github.com/xiangyugongzuoliu
+- **Docker Hub**：https://hub.docker.com/r/xiangyugongzuoliu/deep-research
+- **Gemini API**：https://aistudio.google.com/app/apikey
+
+---
+
+## 📄 开源协议
+
+本项目基于私有源码，Docker 镜像公开发布供免费使用。
+
+**作者**：翔宇工作流
+**年份**：2025
