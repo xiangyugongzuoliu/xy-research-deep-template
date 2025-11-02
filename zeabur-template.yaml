@@ -1,10 +1,10 @@
 apiVersion: zeabur.com/v1
 kind: Template
 metadata:
-  name: deep-research-api
+  name: deep-research
 
 spec:
-  name: Deep Research API
+  name: Deep Research
   description: 基于 Gemini 的深度研究引擎，支持异步任务执行、实时进度追踪、Webhook 回调
 
   icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
