@@ -32,15 +32,10 @@ spec:
       name: Gemini API Key
       description: 从 https://aistudio.google.com/app/apikey 获取 Gemini API Key
 
-    - key: X_API_KEY
+    - key: ACCESS_PASSWORD
       type: PASSWORD
-      name: API 访问密钥
-      description: API 访问密钥，用于保护 REST API（建议使用 32 位随机字符串）
-
-    - key: TASK_RETENTION_HOURS
-      type: STRING
-      name: 任务保留时间
-      description: 任务保留时间（小时），默认 24 小时
+      name: 访问密码
+      description: 用于前端代理模式和 REST API 认证（建议使用 32 位随机字符串）
 
   services:
     - name: deep-research
@@ -59,8 +54,7 @@ spec:
         env:
           GOOGLE_GENERATIVE_AI_API_KEY:
             expose: true
-          X_API_KEY:
+          ACCESS_PASSWORD:
             expose: true
           TASK_RETENTION_HOURS:
             default: "24"
-            expose: true
