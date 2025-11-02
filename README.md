@@ -1,7 +1,7 @@
 # Deep Research API - Zeabur 部署模板
 
 <p align="center">
-  <strong>基于 Gemini 2.0 Flash Thinking 的深度研究引擎</strong>
+  <strong>基于 Gemini 2.5 Flash Flash Thinking 的深度研究引擎</strong>
 </p>
 
 <p align="center">
@@ -94,7 +94,7 @@ curl https://your-domain.zeabur.app/api/research/task_xxx \
 
 ## ✨ 核心功能
 
-- ✅ **AI 深度思考** - 基于 Gemini 2.0 Flash Thinking 模型
+- ✅ **AI 深度思考** - 基于 Gemini 2.5 Flash Flash Thinking 模型
 - ✅ **智能搜索** - 自动规划多维度搜索任务
 - ✅ **长文本报告** - 生成 3000+ 字的结构化 Markdown 报告
 - ✅ **异步执行** - 支持轮询和 Webhook 两种模式
@@ -152,7 +152,7 @@ https://your-app-name.zeabur.app
 ## 🙏 技术栈
 
 - **框架**：Next.js 15 + React 19
-- **AI 模型**：Gemini 2.0 Flash Thinking + Gemini 2.0 Flash Exp
+- **AI 模型**：Gemini 2.5 Flash Flash Thinking + Gemini 2.5 Flash Flash Exp
 - **语言**：TypeScript
 - **样式**：Tailwind CSS
 - **API**：REST API + SSE
