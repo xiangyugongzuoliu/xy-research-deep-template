@@ -172,38 +172,16 @@ https://your-app-name.zeabur.app
 
 ---
 
-## 📄 开源协议与致谢
+## 📝 说明
 
-### 基于开源项目
+本项目修改自开源项目 [u14app/deep-research](https://github.com/u14app/deep-research)，添加了 REST API 功能、异步任务执行、Webhook 回调等特性，仅供自用。
 
-本项目基于 [u14app/deep-research](https://github.com/u14app/deep-research) 修改开发，添加了 REST API 功能、异步任务执行、Webhook 回调等特性。
-
-原项目采用 **MIT License**，我们遵循开源协议，保留原项目版权声明：
-
-```
-MIT License
-Copyright (c) 2024 u14app
-```
-
-### 本项目修改
-
-- ✅ 添加 REST API 接口（POST /api/research, GET /api/research/:taskId）
-- ✅ 实现异步任务执行和轮询机制
-- ✅ 添加 Webhook 回调支持
-- ✅ 实现实时进度追踪（0-100%）
-- ✅ 添加 x-api-key 认证保护
-- ✅ 优化 Docker 部署配置
-- ✅ 创建 API 文档页面
-- ✅ 适配 Zeabur 一键部署
-
-### 许可证
-
-本项目继承原项目的 **MIT License**，允许任何人自由使用、修改和分发。
-
-**原作者**：u14app
-**修改者**：翔宇工作流
-**年份**：2025
-
-### 致谢
-
-感谢 u14app 创建并开源了 Deep Research 项目，为 AI 研究工具领域做出的贡献。
+**新增功能**：
+- REST API 接口（POST /api/research, GET /api/research/:taskId）
+- 异步任务执行和轮询机制
+- Webhook 回调支持
+- 实时进度追踪（0-100%）
+- x-api-key 认证保护
+- Docker 部署优化
+- API 文档页面
+- Zeabur 一键部署
