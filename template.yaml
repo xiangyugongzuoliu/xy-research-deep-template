@@ -1,0 +1,72 @@
+apiVersion: zeabur.com/v1
+kind: Template
+metadata:
+  name: deep-research-api
+  author: 翔宇工作流
+
+spec:
+  description: 基于 Gemini 2.0 的深度研究引擎
+
+  icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
+
+  tags:
+    - AI
+    - Research
+    - API
+    - Gemini
+    - n8n
+
+  readme: https://github.com/aiworkflowstudio/deep-research-zeabur
+
+  variables:
+    - key: GOOGLE_GENERATIVE_AI_API_KEY
+      type: STRING
+      name: Gemini API Key
+      description: 从 https://aistudio.google.com/app/apikey 获取
+      required: true
+
+    - key: X_API_KEY
+      type: STRING
+      name: API 访问密钥
+      description: API 访问密钥，用于保护 REST API（建议使用 32 位随机字符串）
+      required: true
+      default: ""
+
+    - key: TASK_RETENTION_HOURS
+      type: NUMBER
+      name: 任务保留时间
+      description: 任务保留时间（小时），默认 24 小时
+      required: false
+      default: "24"
+
+  services:
+    - name: deep-research
+      template: PREBUILT
+      spec:
+        source:
+          image: xiangyugongzuoliu/deep-research:latest
+
+        ports:
+          - id: web
+            port: 3000
+            type: HTTP
+
+        env:
+          GOOGLE_GENERATIVE_AI_API_KEY:
+            default: ${GOOGLE_GENERATIVE_AI_API_KEY}
+
+          X_API_KEY:
+            default: ${X_API_KEY}
+
+          TASK_RETENTION_HOURS:
+            default: ${TASK_RETENTION_HOURS}
+
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: "1"
+          requests:
+            memory: 512Mi
+            cpu: "0.5"
+
+        volumes: []
