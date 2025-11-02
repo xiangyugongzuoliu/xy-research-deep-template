@@ -36,11 +36,23 @@
 |--------|------|--------|------|
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini API Key（[获取地址](https://aistudio.google.com/app/apikey)） | 无 | ✅ |
 | `ACCESS_PASSWORD` | 访问密码（用于前端代理模式和 REST API 认证） | 无 | ✅ |
+| `TAVILY_API_KEY` | Tavily API Key（[获取地址](https://tavily.com)）<br>配置后将使用 Tavily 搜索服务，自动获取图片和完整引用来源 | 空 | ❌ |
 | `TASK_RETENTION_HOURS` | 任务保留时间（小时） | `24` | ❌ |
 
 **安全提示：**
 - Gemini API Key 和 ACCESS_PASSWORD 务必妥善保管
 - 建议使用 `openssl rand -base64 32` 生成 ACCESS_PASSWORD
+
+**关于搜索服务：**
+- 默认使用 **Gemini 内置搜索**（完全免费）
+- 配置 `TAVILY_API_KEY` 后自动切换到 **Tavily 搜索服务**
+- Tavily 优势：
+  - 提供相关图片（Gemini 内置搜索不支持）
+  - 提供完整的引用来源链接
+  - 搜索结果更丰富
+- Tavily 限制：
+  - 需要注册获取 API Key（有免费额度）
+  - [注册地址](https://tavily.com)
 
 ---
 
@@ -95,14 +107,15 @@ curl https://your-domain.zeabur.app/api/research/task_xxx \
 ## ✨ 核心功能
 
 - ✅ **AI 深度思考** - 基于 Gemini 模型
-- ✅ **智能搜索** - 自动规划多维度搜索任务
+- ✅ **智能搜索** - 自动规划多维度搜索任务，支持 Gemini 内置搜索和 Tavily 外部搜索
 - ✅ **长文本报告** - 生成 3000+ 字的结构化 Markdown 报告
+- ✅ **图片和引用** - 配置 Tavily API 后自动获取相关图片和完整引用来源
 - ✅ **异步执行** - 支持轮询和 Webhook 两种模式
 - ✅ **实时进度** - 0-100% 进度追踪
 - ✅ **API 认证** - x-api-key 保护
 - ✅ **n8n 集成** - 完美适配自动化工具
 - ✅ **Web 界面** - 现代化 Web UI
-- ✅ **100% 免费** - 使用 Gemini 免费额度
+- ✅ **100% 免费** - 使用 Gemini 免费额度（Tavily 可选）
 
 ---
 
