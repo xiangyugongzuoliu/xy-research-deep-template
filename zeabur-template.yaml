@@ -2,12 +2,13 @@ apiVersion: zeabur.com/v1
 kind: Template
 metadata:
   name: deep-research-api
-  author: 翔宇工作流
 
 spec:
-  description: 基于 Gemini 2.0 的深度研究引擎
+  name: Deep Research API
+  description: 基于 Gemini 2.0 Flash Thinking 的深度研究引擎，支持异步任务执行、实时进度追踪、Webhook 回调。
 
   icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
+  author: 翔宇工作流
 
   tags:
     - AI
@@ -15,58 +16,51 @@ spec:
     - API
     - Gemini
     - n8n
+    - Markdown
+    - 深度研究
+    - 自动化
 
   readme: https://github.com/aiworkflowstudio/deep-research-zeabur
+
+  source:
+    type: git
+    url: https://github.com/aiworkflowstudio/deep-research-zeabur
 
   variables:
     - key: GOOGLE_GENERATIVE_AI_API_KEY
       type: STRING
       name: Gemini API Key
-      description: 从 https://aistudio.google.com/app/apikey 获取
-      required: true
+      description: 从 https://aistudio.google.com/app/apikey 获取 Gemini API Key
 
     - key: X_API_KEY
-      type: STRING
+      type: PASSWORD
       name: API 访问密钥
       description: API 访问密钥，用于保护 REST API（建议使用 32 位随机字符串）
-      required: true
-      default: ""
 
     - key: TASK_RETENTION_HOURS
-      type: NUMBER
+      type: STRING
       name: 任务保留时间
       description: 任务保留时间（小时），默认 24 小时
-      required: false
-      default: "24"
 
   services:
     - name: deep-research
       template: PREBUILT
       spec:
+        id: deep-research
+        name: Deep Research API
+        icon: https://raw.githubusercontent.com/aiworkflowstudio/deep-research-zeabur/main/assets/icon.svg
         source:
           image: xiangyugongzuoliu/deep-research:latest
-
         ports:
           - id: web
             port: 3000
             type: HTTP
-
+        volumes: []
         env:
           GOOGLE_GENERATIVE_AI_API_KEY:
-            default: ${GOOGLE_GENERATIVE_AI_API_KEY}
-
+            expose: true
           X_API_KEY:
-            default: ${X_API_KEY}
-
+            expose: true
           TASK_RETENTION_HOURS:
-            default: ${TASK_RETENTION_HOURS}
-
-        resources:
-          limits:
-            memory: 2Gi
-            cpu: "1"
-          requests:
-            memory: 512Mi
-            cpu: "0.5"
-
-        volumes: []
+            default: "24"
+            expose: true
